@@ -26,7 +26,14 @@ instance Arbitrary String where
     arbitrary = mgenName
 
 instance Arbitrary Node where
-    arbitrary = undefined
+    arbitrary = do
+      vs <- arbitrary
+      vi <- arbitrary
+      vf <- arbitrary
+      vb <- arbitrary
+      vt <- arbitrary
+      n <- elements [VString vs, VInteger vi, VFloat vf, VBoolean vb, VDatetime vt]
+      return n
 
 instance Arbitrary Table where
     arbitrary = do
