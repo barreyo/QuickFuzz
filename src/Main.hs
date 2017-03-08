@@ -85,6 +85,8 @@ import qualified Wav
 import qualified ByteString
 import qualified Unicode
 
+import qualified TOML
+
 --import qualified MarkUpSvg
 
 import System.Console.ArgParser
@@ -117,55 +119,55 @@ dispatch arg = do
         case findFileType arg of
 
 #ifdef IMGS
-            "Bmp"  -> Process.main (Bmp.mencode,undefined) args b
-            "Gif"  -> Process.main (Gif.mencode,Gif.mdecode) args b
-            "Jpeg" -> Process.main (Jpeg.mencode,Jpeg.mdecode) args b
-            "Png"  -> Process.main (Png.mencode,Png.mdecode) args b
-            "Tiff" -> Process.main (Tiff.mencode,undefined)  args b
-            "Tga"  -> Process.main (Tga.mencode,undefined)  args b
-            "Pnm"  -> Process.main (Pnm.mencode,undefined)  args b
-            "Svg"  -> Process.main (Svg.mencode,Svg.mdecode)  args b
-            "Ico"  -> Process.main (Ico.mencode, undefined)  args b
+            "Bmp"  -> Process.main (Bmp.mencode,  undefined)     args b
+            "Gif"  -> Process.main (Gif.mencode,  Gif.mdecode)   args b
+            "Jpeg" -> Process.main (Jpeg.mencode, Jpeg.mdecode)  args b
+            "Png"  -> Process.main (Png.mencode,  Png.mdecode)   args b
+            "Tiff" -> Process.main (Tiff.mencode, undefined)     args b
+            "Tga"  -> Process.main (Tga.mencode,  undefined)     args b
+            "Pnm"  -> Process.main (Pnm.mencode,  undefined)     args b
+            "Svg"  -> Process.main (Svg.mencode,  Svg.mdecode)   args b
+            "Ico"  -> Process.main (Ico.mencode,  undefined)     args b
 #endif
 
 #ifdef ARCHS
-            "Zip"  -> Process.main (Zip.mencode,undefined)  args b
+            "Zip"  -> Process.main (Zip.mencode,  undefined)  args b
             --"Bzip" -> Process.main (Bzip.mencode,undefined)  args b
-            "Gzip" -> Process.main (Gzip.mencode,undefined)  args b
-            "Tar"  -> Process.main (Tar.mencode,undefined)  args b
-            "CPIO" -> Process.main (CPIO.mencode,undefined)  args b
+            "Gzip" -> Process.main (Gzip.mencode, undefined)  args b
+            "Tar"  -> Process.main (Tar.mencode,  undefined)  args b
+            "CPIO" -> Process.main (CPIO.mencode, undefined)  args b
 #endif
 
 
 #ifdef CODES
-            "Dot"  -> Process.main (Dot.mencode,undefined)  args b
-            "Xml"  -> Process.main (Xml.mencode,Xml.mdecode)  args b
-            "Html" -> Process.main (Html.mencode,undefined)  args b
-            "Js"   -> Process.main (Js.mencode,undefined)  args b
-            "Py"   -> Process.main (Python.mencode,undefined)  args b
-            "CSS"  -> Process.main (Css.mencode,undefined)  args b
-            "JSON"   -> Process.main (JSON.mencode,undefined) args b
-            "GLSL"   -> Process.main (GLSL.mencode,undefined) args b
-            "Regex" -> Process.main (Regex.mencode,undefined)  args b
-            "Lua"   -> Process.main (Lua.mencode,undefined)  args b
-            "Sh"   -> Process.main (Sh.mencode,undefined) args b
+            "Dot"   -> Process.main (Dot.mencode,    undefined)   args b
+            "Xml"   -> Process.main (Xml.mencode,    Xml.mdecode) args b
+            "Html"  -> Process.main (Html.mencode,   undefined)   args b
+            "Js"    -> Process.main (Js.mencode,     undefined)   args b
+            "Py"    -> Process.main (Python.mencode, undefined)   args b
+            "CSS"   -> Process.main (Css.mencode,    undefined)   args b
+            "JSON"  -> Process.main (JSON.mencode,   undefined)   args b
+            "GLSL"  -> Process.main (GLSL.mencode,   undefined)   args b
+            "Regex" -> Process.main (Regex.mencode,  undefined)   args b
+            "Lua"   -> Process.main (Lua.mencode,    undefined)   args b
+            "Sh"    -> Process.main (Sh.mencode,     undefined)   args b
 #endif
 
 #ifdef DOCS
-            "Eps"  -> Process.main (Eps.mencode,undefined) args b
-            "Pdf"  -> Process.main (Pdf.mencode,undefined) args b
-            "Rtf"  -> Process.main (Pandoc.mencode_rtf,undefined)  args b
-            "Docx"  -> Process.main (Pandoc.mencode_docx,undefined)  args b
-            "Odt"  -> Process.main (Pandoc.mencode_odt,undefined)  args b
-            "PS"  -> Process.main (PS.mencode,undefined)  args b
-            "ICal"  -> Process.main (ICal.mencode,undefined)  args b
+            "Eps"  -> Process.main (Eps.mencode,         undefined) args b
+            "Pdf"  -> Process.main (Pdf.mencode,         undefined) args b
+            "Rtf"  -> Process.main (Pandoc.mencode_rtf,  undefined) args b
+            "Docx" -> Process.main (Pandoc.mencode_docx, undefined) args b
+            "Odt"  -> Process.main (Pandoc.mencode_odt,  undefined) args b
+            "PS"   -> Process.main (PS.mencode,          undefined) args b
+            "ICal" -> Process.main (ICal.mencode,        undefined) args b
 #endif
 
 
 #ifdef PKI
-            "ASN1"  -> Process.main (ASN1.mencode,undefined)  args b
-            "X509"  -> Process.main (X509.mencode,undefined)  args b
-            "CRL"  -> Process.main (CRL.mencode,undefined)  args b
+            "ASN1" -> Process.main (ASN1.mencode, undefined)  args b
+            "X509" -> Process.main (X509.mencode, undefined)  args b
+            "CRL"  -> Process.main (CRL.mencode,  undefined)  args b
 #endif
 
 

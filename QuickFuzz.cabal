@@ -76,12 +76,12 @@ executable QuickFuzz
                        ScopedTypeVariables, TypeSynonymInstances, Rank2Types, FlexibleInstances, RankNTypes, MultiParamTypeClasses,
                        GADTs, StandaloneDeriving, TypeOperators, GeneralizedNewtypeDeriving, FunctionalDependencies, OverloadedStrings
 
-  build-depends:      base, bytestring, containers, vector, primitive, transformers, binary, QuickCheck, 
+  build-depends:      base, bytestring, containers, vector, primitive, transformers, binary, QuickCheck,
                       quickcheck-unicode, mtl, random, ghc-prim, process, process-extras, deepseq, derive,
                       unix, linear, template-haskell, directory, pretty, argparser, split, wl-pprint,
                       text, parallel-io, monad-par, abstract-par, time, abstract-par, megadeth, parallel,
-                      ghc-mod, haskell-src-exts, haskell-src-meta 
-  
+                      ghc-mod, haskell-src-exts, haskell-src-meta, htoml
+
   if flag(codes)
       build-depends:   HaXml, language-ecmascript, language-dot, language-css, language-python, language-glsl, json, uniplate,
                        language-lua, language-bash, shell-escape, blaze-markup, blaze-html
