@@ -12,17 +12,27 @@ import Strings
 
 import Test.QuickCheck
 import Text.Toml.Types
-import Data.Time.Clock
+
+import Time
+
+import           Data.HashMap.Strict (HashMap)
+import qualified Data.HashMap.Strict as M
+import           Data.Text           (Text)
+import qualified Data.Text           as T
 
 import qualified Data.ByteString.Lazy.Char8 as LC8
 
-instance Arbitrary UTCTime where
-    arbitrary = return $ UTCTime 3 (secondsToDiffTime 23)
-
 instance Arbitrary String where
-   arbitrary = mgenName
+    arbitrary = mgenName
 
-$(devArbitrary ''Table)
+instance Arbitrary Node where
+    arbitrary = undefined
+
+instance Arbitrary Table where
+    arbitrary = do
+        x <- arbitrary
+        y <- arbitrary
+        return $ M.singleton x y
 
 mencode :: Table -> LC8.ByteString
 mencode x = undefined
