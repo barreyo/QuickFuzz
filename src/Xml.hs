@@ -18,7 +18,7 @@ import Mutation
 import DeriveArbitrary
 import DeriveMArbitrary
 import DeriveMutation
-import Strings 
+import Strings
 
 $(devActions ["Text.XML.HaXml.Combinators"] ''CFilter False [''Int])
 $(devArbitrary ''CFilterAction)
@@ -27,14 +27,14 @@ $(devArbitrary ''CFilterAction)
 instance Arbitrary (CFilter i) where
     arbitrary = do
         x <- arbitrary :: Gen CFilterAction
-        return $ performCFilter x 
+        return $ performCFilter x
 
 
 --instance Arbitrary EncodingDecl where
 --   arbitrary = oneof $ map (return . EncodingDecl) ["UTF-8"]
--- 
+--
 --instance Arbitrary XMLDecl where
---   arbitrary = do 
+--   arbitrary = do
 --                ver <- oneof $ map return ["1.0"]
 --                (x,y) <- arbitrary
 --                return $ XMLDecl ver x y
@@ -42,7 +42,7 @@ instance Arbitrary (CFilter i) where
 
 instance Arbitrary String where
    --arbitrary = genName
-   arbitrary = mgenName 
+   arbitrary = mgenName
 
 data MXml = MXml (Document Posn) deriving Show
 
@@ -59,7 +59,7 @@ mencode :: MXml -> LC8.ByteString
 mencode (MXml x)= Text.XML.HaXml.ByteStringPP.document x
 
 {-
-mencode x = unsafePerformIO ( 
+mencode x = unsafePerformIO (
              do r <- timeout 10000 $ evaluate $ Text.XML.HaXml.ByteStringPP.document x
                 case r of
                   Just x -> return x --unsafePerformIO $ return x
@@ -68,7 +68,7 @@ mencode x = unsafePerformIO (
 -}
 --mhandler1 :: SomeException -> IO (Maybe (Document Posn))
 --mhandler1 x = return $ Nothing
- 
+
 mdecode :: C8.ByteString -> MXml
-mdecode xml =  MXml $ xmlParse "" (C8.unpack xml) 
+mdecode xml =  MXml $ xmlParse "" (C8.unpack xml)
               -- unsafePerformIO $ catch ( evaluate $ Just $ xmlParse "" (C8.unpack xml)) mhandler1

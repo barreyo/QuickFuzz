@@ -2,18 +2,19 @@
 
 module TOML where
 
-import Data.DeriveTH
+import           Data.DeriveTH
 
-import Mutation
-import DeriveArbitrary
-import DeriveMArbitrary
-import DeriveMutation
-import Strings
+import           Mutation
+import           DeriveArbitrary
+import           DeriveMArbitrary
+import           DeriveMutation
+import           Strings
+import           Vector
 
-import Test.QuickCheck
-import Text.Toml.Types
+import           Test.QuickCheck
+import           Text.Toml.Types
 
-import Time
+import           Time
 
 import           Data.HashMap.Strict (HashMap)
 import qualified Data.HashMap.Strict as M
@@ -35,11 +36,19 @@ instance Arbitrary Node where
       n <- elements [VString vs, VInteger vi, VFloat vf, VBoolean vb, VDatetime vt]
       return n
 
+instance Arbitrary VTArray where
+    arbitrary = do
+        a <- arbitrary :: Vector Table
+        return a
+
+instance Arbitrary VArray where
+    arbitrary = arbitrary :: Vector Node
+
 instance Arbitrary Table where
     arbitrary = do
-        x <- arbitrary
-        y <- arbitrary
-        return $ M.singleton x y
+        x <- listOf arbitrary
+        y <- listOf arbitrary
+        return $ M.fromList (zip x y)
 
 mencode :: Table -> LC8.ByteString
 mencode x = undefined
