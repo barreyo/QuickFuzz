@@ -14,7 +14,6 @@ Flag Imgs
   Default:     False
   Manual:      True
 
-
 Flag Archs
   Description: Supports ... formats.
   Default:     False
@@ -94,6 +93,7 @@ executable QuickFuzz
 
   if flag(docs)
       build-depends: pandoc-types, pandoc, data-default, hps, hcg-minus, iCalendar, superdoc, easyrender
+
   if flag(pki)
       build-depends: asn1-types, asn1-encoding, x509
 

@@ -193,8 +193,9 @@ dispatch arg = do
 
 #endif
 
-            "Unicode" -> Process.main (Unicode.mencode,undefined)  args b
-            "BS"   -> Process.main (ByteString.bencode,undefined)  args b
+            "Unicode" -> Process.main (Unicode.mencode,undefined)     args b
+            "BS"      -> Process.main (ByteString.bencode,undefined)  args b
+            "Toml"    -> Process.main (TOML.mencode, undefined)       args b
 
             _      -> print "Unsupported Type"
 
